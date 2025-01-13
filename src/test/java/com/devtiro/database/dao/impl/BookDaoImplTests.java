@@ -1,5 +1,6 @@
 package com.devtiro.database.dao.impl;
 
+import com.devtiro.database.TestDataUtil;
 import com.devtiro.database.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,15 +25,12 @@ public class BookDaoImplTests {
     @Test
     public void testThatCreateBookGeneratesCorrectSql() {
 
-        Book book = Book.builder()
-                .isbn("589-244-175")
-                .title("Karamazov Brothers")
-                .authorId(1L).build();
+        Book book = TestDataUtil.createTestBookA();
 
         underTest.create(book);
 
         verify(jdbcTemplate).update(
-                eq("Insert into books ( isbn, title, authorId ) VALUES (?,?,? )"),
+                eq("Insert into books (isbn, title, author_id ) VALUES (?,?,? )"),
                 eq("589-244-175"),
                 eq("Karamazov Brothers"),
                 eq(1L)
@@ -47,9 +45,21 @@ public class BookDaoImplTests {
 
         // Verify that the correct SQL query was sent to the jdbcTemplate.
         verify(jdbcTemplate).query(
-                eq("SELECT isbn, title, authorId from books WHERE isbn = ? LIMIT 1"),
+                eq("SELECT isbn, title, author_id from books WHERE isbn = ? LIMIT 1"),
                 ArgumentMatchers.<BookDaoImpl.BookRowMapper>any(),
                 eq("589-244-175")
         );
+    }
+
+    @Test
+    public void testThatFindManyGeneratesCorrectSql() {
+
+        underTest.find();
+
+        verify(jdbcTemplate).query(
+                eq("Select isbn, title, author_id from books"),
+                ArgumentMatchers.<BookDaoImpl.BookRowMapper>any()
+        );
+
     }
 }

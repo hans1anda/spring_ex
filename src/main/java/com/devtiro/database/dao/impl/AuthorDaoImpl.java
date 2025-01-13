@@ -23,7 +23,7 @@ public class AuthorDaoImpl implements IAuthorDao {
 
     @Override
     public void create(Author author) {
-        jdbcTemplate.update("Insert into authors (id,name,age) VALUES (?,?,?)",
+        jdbcTemplate.update("Insert into authors (id, name, age) VALUES (?,?,?)",
                 author.getId(),
                 author.getName(),
                 author.getAge()
@@ -40,6 +40,15 @@ public class AuthorDaoImpl implements IAuthorDao {
 
         //If a result is found, return it as an Optional.
         return results.stream().findFirst();
+    }
+
+    @Override
+    public List<Author> find() {
+
+        return jdbcTemplate.query(
+                "select id, name, age FROM authors",
+                new AuthorRowMapper()
+        );
     }
 
     // INNER CLASS
