@@ -1,6 +1,7 @@
 package com.devtiro.database.dao.impl;
 
 import com.devtiro.database.TestDataUtil;
+import com.devtiro.database.domain.Author;
 import com.devtiro.database.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,6 +61,33 @@ public class BookDaoImplTests {
                 eq("Select isbn, title, author_id from books"),
                 ArgumentMatchers.<BookDaoImpl.BookRowMapper>any()
         );
+
+    }
+
+    @Test
+    public void testThatUpdateGeneratesCorrectSql() {
+
+        Book book = TestDataUtil.createTestBookA();
+        underTest.update(book.getIsbn(), book);
+
+        verify(jdbcTemplate).update(
+                eq("Update books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?"),
+                eq(book.getIsbn()),
+                eq(book.getTitle()),
+                eq(book.getAuthorId()),
+                eq("589-244-175")
+        );
+
+    }
+
+    @Test
+    public void testThatDeleteGeneratesCorrectSql() {
+
+        underTest.delete("589-244-175");
+
+        verify(jdbcTemplate).update(
+                "Delete from books where isbn = ?",
+                "589-244-175");
 
     }
 }

@@ -44,6 +44,20 @@ public class BookDaoImpl implements IBookDao {
                 new BookRowMapper());
     }
 
+    @Override
+    public void update(String isbn, Book book) {
+        jdbcTemplate.update("Update books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?",
+                book.getIsbn(),
+                book.getTitle(),
+                book.getAuthorId(),
+                isbn);
+    }
+
+    @Override
+    public void delete(String s) {
+        jdbcTemplate.update("Delete from books where isbn = ?", s);
+    }
+
     public static class BookRowMapper implements RowMapper<Book> {
 
         @Override

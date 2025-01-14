@@ -2,7 +2,6 @@ package com.devtiro.database.dao.impl;
 
 import com.devtiro.database.dao.IAuthorDao;
 import com.devtiro.database.domain.Author;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -23,7 +22,7 @@ public class AuthorDaoImpl implements IAuthorDao {
 
     @Override
     public void create(Author author) {
-        jdbcTemplate.update("Insert into authors (id, name, age) VALUES (?,?,?)",
+        jdbcTemplate.update("Insert into authors (id, name, age ) VALUES (?,?,? )",
                 author.getId(),
                 author.getName(),
                 author.getAge()
@@ -49,6 +48,23 @@ public class AuthorDaoImpl implements IAuthorDao {
                 "select id, name, age FROM authors",
                 new AuthorRowMapper()
         );
+    }
+
+    @Override
+    public void update(Long id, Author author) {
+        jdbcTemplate.update(
+                "Update authors SET id = ?, name = ?, age = ? WHERE id = ?",
+                author.getId(),
+                author.getName(),
+                author.getAge(),
+                id
+        );
+    }
+
+    @Override
+    public void delete(long id) {
+        jdbcTemplate.update("Delete from authors where id = ?",
+                id);
     }
 
     // INNER CLASS

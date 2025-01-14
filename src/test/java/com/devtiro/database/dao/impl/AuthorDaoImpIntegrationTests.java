@@ -36,8 +36,10 @@ public class AuthorDaoImpIntegrationTests {
 
         Optional<Author> result = underTest.findOne(author.getId());
 
+        // Verifies that the Optional is not empty
         assertThat(result).isPresent();
 
+        // Checks the content
         assertThat(result.get()).isEqualTo(author);
 
     }
@@ -56,6 +58,40 @@ public class AuthorDaoImpIntegrationTests {
 
         assertThat(authorList).hasSize(3).containsExactly(authorA, authorB, authorC);
 
+
+    }
+
+    @Test
+    public void testThatAuthorCanBeUpdated() {
+
+        Author authorB = TestDataUtil.createTestAuthorB();
+
+        underTest.create(authorB);
+
+        authorB.setName("Updated");
+
+        underTest.update(authorB.getId(),authorB);
+
+        Optional<Author> getOneAuthor = underTest.findOne(authorB.getId());
+
+        assertThat(getOneAuthor).isPresent();
+
+        assertThat(getOneAuthor.get()).isEqualTo(authorB);
+
+    }
+
+    @Test
+    public void testThatAuthorCanBeDeletede() {
+
+        Author author = TestDataUtil.createTestAuthorA();
+
+        underTest.create(author);
+
+        underTest.delete(author.getId());
+
+        Optional<Author> getOneAuthor = underTest.findOne(author.getId());
+
+        assertThat(getOneAuthor).isEmpty();
 
     }
 

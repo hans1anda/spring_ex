@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class BookDaoImpIntegrationTests {
 
     private final IAuthorDao authorDao;
@@ -72,7 +74,48 @@ public class BookDaoImpIntegrationTests {
 
         List<Book> bookList = underTest.find();
 
+        // Verifies that the Optional is not empty and checks context
         assertThat(bookList).hasSize(3).containsExactly(bookA, bookB, bookC);
+
+    }
+
+    @Test
+    public void testThatBookCanBeUpdated() {
+
+        Author author = TestDataUtil.createTestAuthorA();
+        authorDao.create(author);
+
+        Book book = TestDataUtil.createTestBookA();
+        book.setAuthorId(author.getId());
+
+        book.setTitle("Updated");
+        underTest.create(book);
+
+
+        underTest.update(book.getIsbn(), book);
+
+        Optional<Book> getOneBook = underTest.findOne(book.getIsbn());
+
+        assertThat(getOneBook).isPresent();
+
+        assertThat(getOneBook.get()).isEqualTo(book);
+
+    }
+
+    @Test
+    public void testThatBookCanBeDeleted() {
+
+        Author author = TestDataUtil.createTestAuthorA();
+        authorDao.create(author);
+
+        Book book = TestDataUtil.createTestBookA();
+        book.setAuthorId(author.getId());
+
+        underTest.delete(book.getIsbn());
+
+        Optional<Book> getOneBook = underTest.findOne(book.getIsbn());
+
+        assertThat(getOneBook).isEmpty();
 
     }
 
