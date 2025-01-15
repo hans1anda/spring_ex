@@ -31,24 +31,24 @@ public final class TestDataUtil {
 
     // ------------------------------------------------------------------------ //
 
-    public static Book createTestBookA() {
+    public static Book createTestBookA(final Author author) {
         return Book.builder()
                 .isbn("589-244-175")
                 .title("Karamazov Brothers")
-                .authorId(1L).build();
+                .author(author).build();
     }
 
-    public static Book createTestBookB() {
+    public static Book createTestBookB(final Author author) {
         return Book.builder()
                 .isbn("100-32-049")
                 .title("Incognito")
-                .authorId(2L).build();
+                .author(author).build();
     }
 
-    public static Book createTestBookC() {
+    public static Book createTestBookC(final Author author) {
         return Book.builder()
                 .isbn("236-935-918")
                 .title("Slow and Rapid Thinking")
-                .authorId(3L).build();
+                .author(author).build();
     }
 }
