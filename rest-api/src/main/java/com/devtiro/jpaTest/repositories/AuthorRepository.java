@@ -1,18 +1,18 @@
 package com.devtiro.jpaTest.repositories;
 
-import com.devtiro.jpaTest.domain.Author;
+import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorRepository extends CrudRepository<Author, Long> {
+public interface AuthorRepository extends CrudRepository<AuthorEntity, Long> {
 
-    Iterable<Author> ageLessThan(int age);
+    Iterable<AuthorEntity> ageLessThan(int age);
 
     // This called Hibernate Query Language ( HQL )
     @Query("SELECT a FROM Author a WHERE a.age > :age")
-    Iterable<Author> findAuthorsWithAgeGreaterThan(@Param("age") int age);
+    Iterable<AuthorEntity> findAuthorsWithAgeGreaterThan(@Param("age") int age);
 
 }
