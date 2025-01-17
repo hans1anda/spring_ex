@@ -7,11 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "books")
+@Table(name="books")
 public class BookEntity {
 
     @Id
@@ -19,8 +19,8 @@ public class BookEntity {
 
     private String title;
 
-    @ManyToOne(cascade = CascadeType.ALL) // This annotation tell us that you may create many books but you have one Author
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
-    private AuthorEntity author;
+    private AuthorEntity authorEntity;
 
 }

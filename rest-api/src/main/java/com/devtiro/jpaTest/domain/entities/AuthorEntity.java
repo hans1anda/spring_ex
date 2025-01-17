@@ -6,18 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table( name = "authors")
+@Table(name = "authors")
 public class AuthorEntity {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "author_id_seq")
-    private Long id ;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_id_seq")
+    private Long id;
 
     private String name;
 
