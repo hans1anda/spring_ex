@@ -33,7 +33,7 @@ public class BookEntityRepositoryIntegrationTests {
 
         AuthorEntity author = TestDataUtil.createTestAuthorA();
 
-        BookEntity bookEntity = TestDataUtil.createTestBookA(author);
+        BookEntity bookEntity = TestDataUtil.createTestBookEntityA(author);
 
         underTest.save(bookEntity);
 
@@ -49,7 +49,7 @@ public class BookEntityRepositoryIntegrationTests {
 
         AuthorEntity author = TestDataUtil.createTestAuthorA();
 
-        BookEntity bookEntityA = TestDataUtil.createTestBookA(author);
+        BookEntity bookEntityA = TestDataUtil.createTestBookEntityA(author);
         BookEntity bookEntityB = TestDataUtil.createTestBookB(author);
         BookEntity bookEntityC = TestDataUtil.createTestBookC(author);
 
@@ -70,7 +70,7 @@ public class BookEntityRepositoryIntegrationTests {
 
         AuthorEntity author = TestDataUtil.createTestAuthorA();
 
-        BookEntity bookEntity = TestDataUtil.createTestBookA(author);
+        BookEntity bookEntity = TestDataUtil.createTestBookEntityA(author);
 
         underTest.save(bookEntity);
 
@@ -91,7 +91,7 @@ public class BookEntityRepositoryIntegrationTests {
 
         AuthorEntity author = TestDataUtil.createTestAuthorA();
 
-        BookEntity bookEntity = TestDataUtil.createTestBookA(author);
+        BookEntity bookEntity = TestDataUtil.createTestBookEntityA(author);
 
         underTest.deleteById(bookEntity.getIsbn());
 

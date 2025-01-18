@@ -4,5 +4,5 @@ import com.devtiro.jpaTest.domain.entities.BookEntity;
 
 public interface IBookService {
 
-    BookEntity createBook(String isbn, BookEntity author) ;
+    BookEntity createBook(String isbn, BookEntity book) ;
 }

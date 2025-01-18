@@ -1,5 +1,6 @@
 package com.devtiro.jpaTest;
 
+import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.dto.BookDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.domain.entities.BookEntity;
@@ -32,8 +33,15 @@ public final class TestDataUtil {
 
     // ------------------------------------------------------------------------ //
 
-    public static BookEntity createTestBookA(final AuthorEntity author) {
+    public static BookEntity createTestBookEntityA(final AuthorEntity author) {
         return BookEntity.builder()
+                .isbn("589-244-175")
+                .title("Karamazov Brothers")
+                .author(author).build();
+    }
+
+    public static BookDto craeteTestBookDto(final AuthorDto author) {
+        return BookDto.builder()
                 .isbn("589-244-175")
                 .title("Karamazov Brothers")
                 .author(author).build();
