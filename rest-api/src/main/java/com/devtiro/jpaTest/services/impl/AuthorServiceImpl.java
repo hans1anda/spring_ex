@@ -3,7 +3,9 @@ package com.devtiro.jpaTest.services.impl;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.repositories.AuthorRepository;
 import com.devtiro.jpaTest.services.AuthorService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
