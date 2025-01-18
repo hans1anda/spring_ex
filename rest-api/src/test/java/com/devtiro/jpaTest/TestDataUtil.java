@@ -1,5 +1,6 @@
 package com.devtiro.jpaTest;
 
+import com.devtiro.jpaTest.domain.dto.BookDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.domain.entities.BookEntity;
 import lombok.NoArgsConstructor;

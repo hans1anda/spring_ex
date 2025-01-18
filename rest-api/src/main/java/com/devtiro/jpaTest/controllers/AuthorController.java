@@ -3,7 +3,7 @@ package com.devtiro.jpaTest.controllers;
 import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.mappers.Mapper;
-import com.devtiro.jpaTest.services.AuthorService;
+import com.devtiro.jpaTest.services.IAuthorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthorController {
 
-    private final AuthorService authorService;
+    private final IAuthorService authorService;
 
     private final Mapper<AuthorEntity, AuthorDto> authorMapper;
 
-    public AuthorController(AuthorService authorService, Mapper<AuthorEntity, AuthorDto> authorMapper) {
+    public AuthorController(IAuthorService authorService, Mapper<AuthorEntity, AuthorDto> authorMapper) {
         this.authorService = authorService;
         this.authorMapper = authorMapper;
     }
