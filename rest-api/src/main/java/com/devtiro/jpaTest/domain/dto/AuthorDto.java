@@ -1,11 +1,11 @@
 package com.devtiro.jpaTest.domain.dto;
 
-// It called Pojo ( Plain old Java Objects )
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+// It called Pojo ( Plain old Java Objects )
 
 @Data
 @AllArgsConstructor

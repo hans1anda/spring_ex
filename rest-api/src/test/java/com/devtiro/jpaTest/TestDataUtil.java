@@ -16,6 +16,13 @@ public final class TestDataUtil {
                 .age(59).build();
     }
 
+    public static AuthorDto createTestAuthorDto() {
+        return AuthorDto.builder()
+                .id(7L)
+                .name("Kernel Truck")
+                .age(999).build();
+    }
+
     public static AuthorEntity createTestAuthorB() {
         return AuthorEntity.builder()
                 .id(2L)

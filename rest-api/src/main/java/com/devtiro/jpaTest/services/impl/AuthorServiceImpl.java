@@ -20,7 +20,7 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public AuthorEntity createAuthor(AuthorEntity author) {
+    public AuthorEntity save(AuthorEntity author) {
         return authorRepository.save(author);
     }
 
@@ -36,5 +36,10 @@ public class AuthorServiceImpl implements IAuthorService {
                                 .spliterator(),
                         false)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isExists(Long id) {
+        return authorRepository.existsById(id);
     }
 }

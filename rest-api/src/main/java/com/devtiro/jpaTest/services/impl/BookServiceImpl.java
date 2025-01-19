@@ -1,6 +1,5 @@
 package com.devtiro.jpaTest.services.impl;
 
-import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.domain.entities.BookEntity;
 import com.devtiro.jpaTest.repositories.BookRepository;
 import com.devtiro.jpaTest.services.IBookService;
