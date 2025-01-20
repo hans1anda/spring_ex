@@ -1,5 +1,6 @@
 package com.devtiro.jpaTest.services.impl;
 
+import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.repositories.AuthorRepository;
 import com.devtiro.jpaTest.services.IAuthorService;
@@ -42,4 +43,18 @@ public class AuthorServiceImpl implements IAuthorService {
     public boolean isExists(Long id) {
         return authorRepository.existsById(id);
     }
+
+    @Override
+    public AuthorEntity partialUpdate(Long id, AuthorEntity authorEntity) {
+        authorEntity.setId(id);
+
+        return authorRepository.findById(id).map(existingAuthorEntity -> {
+            Optional.ofNullable(authorEntity.getName()).ifPresent(existingAuthorEntity::setName);
+            Optional.ofNullable(authorEntity.getAge()).ifPresent(existingAuthorEntity::setAge);
+
+            return authorRepository.save(existingAuthorEntity);
+        }).orElseThrow(() -> new RuntimeException("Author does not exist"));
+
+    }
+
 }

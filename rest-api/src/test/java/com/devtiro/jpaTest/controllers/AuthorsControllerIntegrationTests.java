@@ -146,7 +146,7 @@ public class AuthorsControllerIntegrationTests {
         String authorDtoJson = objectMapper.writeValueAsString(testAuthorDto);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.put("/authors/"+ savedAuthorEntity.getId())
+                MockMvcRequestBuilders.put("/authors/" + savedAuthorEntity.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(authorDtoJson)
 
@@ -166,7 +166,7 @@ public class AuthorsControllerIntegrationTests {
         String authorEntityUpdateJson = objectMapper.writeValueAsString(testAuthorEntity);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.put("/authors/"+ savedAuthorEntity.getId())
+                MockMvcRequestBuilders.put("/authors/" + savedAuthorEntity.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(authorEntityUpdateJson)
 
@@ -176,6 +176,48 @@ public class AuthorsControllerIntegrationTests {
                 MockMvcResultMatchers.jsonPath("$.name").value(testAuthorEntity.getName())
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.age").value(testAuthorEntity.getAge())
+        );
+    }
+
+    @Test
+    public void testThatPartialUpdateExistingAuthorReturnsHttpStatus20Ok() throws Exception {
+        AuthorEntity testAuthorA = TestDataUtil.createTestAuthorA();
+        AuthorEntity savedAuthorEntity = authorService.save(testAuthorA);
+
+        AuthorDto testAuthorDto = TestDataUtil.createTestAuthorDto();
+        testAuthorA.setName("UPDATED");
+        String authorDtoJson = objectMapper.writeValueAsString(testAuthorDto);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.patch("/authors/" + savedAuthorEntity.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(authorDtoJson)
+
+        ).andExpect(
+                MockMvcResultMatchers.status().isOk()
+        );
+    }
+
+    @Test
+    public void testThatPartialUpdateExistingAuthorReturnsUpdatedAuthor() throws Exception {
+        AuthorEntity testAuthorA = TestDataUtil.createTestAuthorA();
+        AuthorEntity savedAuthorEntity = authorService.save(testAuthorA);
+
+        AuthorDto testAuthorDto = TestDataUtil.createTestAuthorDto();
+        testAuthorDto.setName("UPDATED");
+        String authorDtoJson = objectMapper.writeValueAsString(testAuthorDto);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.patch("/authors/" + savedAuthorEntity.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(authorDtoJson)
+
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.id").value(testAuthorA.getId())
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.name").value("UPDATED")
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.age").value(testAuthorDto.getAge())
         );
     }
 

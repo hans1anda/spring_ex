@@ -1,5 +1,6 @@
 package com.devtiro.jpaTest.services;
 
+import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface IAuthorService {
     List<AuthorEntity> findAll();
 
     boolean isExists(Long id);
+
+    AuthorEntity partialUpdate(Long id, AuthorEntity authorEntity);
 }
