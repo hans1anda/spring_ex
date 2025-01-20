@@ -49,7 +49,7 @@ public final class TestDataUtil {
 
     public static BookDto createTestBookDto(final AuthorDto author) {
         return BookDto.builder()
-                .isbn("589-244-175")
+                .isbn("100-32-049")
                 .title("Karamazov Brothers")
                 .author(author).build();
     }

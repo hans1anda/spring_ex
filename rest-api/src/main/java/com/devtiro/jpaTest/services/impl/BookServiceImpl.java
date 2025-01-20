@@ -33,11 +33,24 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public Optional<BookEntity> findOne(String isbn) {
-            return bookRepository.findById(isbn);
+        return bookRepository.findById(isbn);
     }
 
     @Override
     public Boolean isExists(String isbn) {
         return bookRepository.existsById(isbn);
+    }
+
+    @Override
+    public BookEntity partialUpdate(String isbn, BookEntity bookEntity) {
+
+        bookEntity.setIsbn(isbn);
+
+        return bookRepository.findById(isbn).map(existingBookEntity -> {
+            Optional.ofNullable(bookEntity.getTitle()).ifPresent(existingBookEntity::setTitle);
+
+            return bookRepository.save(existingBookEntity);
+        }).orElseThrow(() -> new RuntimeException("Book does not exist"));
+
     }
 }
