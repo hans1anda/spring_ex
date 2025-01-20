@@ -47,7 +47,7 @@ public final class TestDataUtil {
                 .author(author).build();
     }
 
-    public static BookDto craeteTestBookDto(final AuthorDto author) {
+    public static BookDto createTestBookDto(final AuthorDto author) {
         return BookDto.builder()
                 .isbn("589-244-175")
                 .title("Karamazov Brothers")

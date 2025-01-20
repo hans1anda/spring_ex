@@ -52,7 +52,7 @@ public class AuthorEntityRepositoryIntegrationTests {
 
     @Test
     public void testThatAuthorCanBeUpdated() {
-        AuthorEntity authorEntityA = TestDataUtil.createTestAuthorA();
+        AuthorEntity authorEntityA = TestDataUtil.createTestAuthorB();
         underTest.save(authorEntityA);
         authorEntityA.setName("UPDATED");
         underTest.save(authorEntityA);
