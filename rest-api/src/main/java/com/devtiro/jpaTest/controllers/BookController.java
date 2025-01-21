@@ -1,6 +1,7 @@
 package com.devtiro.jpaTest.controllers;
 
 
+import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.dto.BookDto;
 import com.devtiro.jpaTest.domain.entities.BookEntity;
 import com.devtiro.jpaTest.mappers.Mapper;
@@ -71,5 +72,18 @@ public class BookController {
         return new ResponseEntity<>(bookMapper.mapTo(updateBookEntity), HttpStatus.OK);
 
     }
+
+    @DeleteMapping(path = "/books/{isbn}")
+    public ResponseEntity<BookDto> deleteBook(@PathVariable("isbn") String isbn) {
+        if(!bookService.isExists(isbn)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        BookEntity deletedBookEntity = bookService.delete(isbn);
+        BookDto deletedBookDto = bookMapper.mapTo(deletedBookEntity);
+
+        return new ResponseEntity<>(deletedBookDto, HttpStatus.NO_CONTENT);
+    }
+
 
 }

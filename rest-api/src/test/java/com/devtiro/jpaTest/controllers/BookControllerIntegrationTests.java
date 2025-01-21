@@ -2,6 +2,7 @@ package com.devtiro.jpaTest.controllers;
 
 import com.devtiro.jpaTest.TestDataUtil;
 import com.devtiro.jpaTest.domain.dto.BookDto;
+import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.domain.entities.BookEntity;
 import com.devtiro.jpaTest.services.IBookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -208,6 +209,29 @@ public class BookControllerIntegrationTests {
                 MockMvcResultMatchers.jsonPath("$.title").value("UPDATED")
         );
 
+    }
+
+    @Test
+    public void testThatDeleteAuthorReturnsHttpStatus204ForNonExistingBook() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.delete("/book/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    public void testThatDeleteAuthorReturnsHttpStatus204ForExistingAuthor() throws Exception {
+
+        BookEntity testBookB = TestDataUtil.createTestBookB(null);
+        BookEntity savedBookEntity = bookService.save(testBookB.getIsbn(), testBookB);
+
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.delete("/books/"+ savedBookEntity.getIsbn())
+                        .contentType(MediaType.APPLICATION_JSON)
+
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
 

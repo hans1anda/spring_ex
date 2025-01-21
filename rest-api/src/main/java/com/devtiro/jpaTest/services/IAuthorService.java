@@ -1,6 +1,5 @@
 package com.devtiro.jpaTest.services;
 
-import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 
 import java.util.List;
@@ -18,5 +17,5 @@ public interface IAuthorService {
 
     AuthorEntity partialUpdate(Long id, AuthorEntity authorEntity);
 
-    void delete(Long id);
+    AuthorEntity delete(Long id);
 }

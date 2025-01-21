@@ -1,6 +1,5 @@
 package com.devtiro.jpaTest.services.impl;
 
-import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.repositories.AuthorRepository;
 import com.devtiro.jpaTest.services.IAuthorService;
@@ -58,8 +57,11 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public void delete(Long id) {
+    public AuthorEntity delete(Long id) {
+        Optional<AuthorEntity> returnedDeletedAuthor = authorRepository.findById(id);
         authorRepository.deleteById(id);
+
+        return returnedDeletedAuthor.orElse(null);
     }
 
 }

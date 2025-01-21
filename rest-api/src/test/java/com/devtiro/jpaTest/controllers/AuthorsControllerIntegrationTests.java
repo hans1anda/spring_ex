@@ -227,7 +227,7 @@ public class AuthorsControllerIntegrationTests {
                 MockMvcRequestBuilders.delete("/authors/1")
                         .contentType(MediaType.APPLICATION_JSON)
 
-        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
