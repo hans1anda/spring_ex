@@ -20,10 +20,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class BookEntityRepositoryIntegrationTests {
 
-    private final BookRepository underTest;
+    private final IBookRepository underTest;
 
     @Autowired
-    public BookEntityRepositoryIntegrationTests(BookRepository underTest) {
+    public BookEntityRepositoryIntegrationTests(IBookRepository underTest) {
         this.underTest = underTest;
     }
 

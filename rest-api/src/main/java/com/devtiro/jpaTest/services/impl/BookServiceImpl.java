@@ -1,8 +1,10 @@
 package com.devtiro.jpaTest.services.impl;
 
 import com.devtiro.jpaTest.domain.entities.BookEntity;
-import com.devtiro.jpaTest.repositories.BookRepository;
+import com.devtiro.jpaTest.repositories.IBookRepository;
 import com.devtiro.jpaTest.services.IBookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +15,9 @@ import java.util.stream.StreamSupport;
 @Service
 public class BookServiceImpl implements IBookService {
 
-    private final BookRepository bookRepository;
+    private final IBookRepository bookRepository;
 
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(IBookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
@@ -35,6 +37,12 @@ public class BookServiceImpl implements IBookService {
     public Optional<BookEntity> findOne(String isbn) {
         return bookRepository.findById(isbn);
     }
+
+    @Override
+    public Page<BookEntity> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
+    }
+
 
     @Override
     public Boolean isExists(String isbn) {

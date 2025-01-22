@@ -1,18 +1,17 @@
 package com.devtiro.jpaTest.controllers;
 
 
-import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.dto.BookDto;
 import com.devtiro.jpaTest.domain.entities.BookEntity;
 import com.devtiro.jpaTest.mappers.Mapper;
 import com.devtiro.jpaTest.services.IBookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 public class BookController {
@@ -44,10 +43,9 @@ public class BookController {
     }
 
     @GetMapping(path = "/books")
-    public List<BookDto> listBook() {
-        List<BookEntity> bookList = bookService.findAll();
-
-        return bookList.stream().map(bookMapper::mapTo).collect(Collectors.toList());
+    public Page<BookDto> listBook(Pageable pageable) {
+        Page<BookEntity> bookList = bookService.findAll(pageable);
+        return bookList.map(bookMapper::mapTo);
     }
 
     @GetMapping(path = "/books/{isbn}")

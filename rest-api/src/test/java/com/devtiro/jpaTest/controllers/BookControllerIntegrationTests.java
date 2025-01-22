@@ -2,7 +2,6 @@ package com.devtiro.jpaTest.controllers;
 
 import com.devtiro.jpaTest.TestDataUtil;
 import com.devtiro.jpaTest.domain.dto.BookDto;
-import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.domain.entities.BookEntity;
 import com.devtiro.jpaTest.services.IBookService;
 import com.fasterxml.jackson.databind.ObjectMapper;

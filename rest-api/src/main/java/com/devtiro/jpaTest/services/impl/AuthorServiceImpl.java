@@ -1,7 +1,7 @@
 package com.devtiro.jpaTest.services.impl;
 
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
-import com.devtiro.jpaTest.repositories.AuthorRepository;
+import com.devtiro.jpaTest.repositories.IAuthorRepository;
 import com.devtiro.jpaTest.services.IAuthorService;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +13,9 @@ import java.util.stream.StreamSupport;
 @Service
 public class AuthorServiceImpl implements IAuthorService {
 
-    private final AuthorRepository authorRepository;
+    private final IAuthorRepository authorRepository;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
+    public AuthorServiceImpl(IAuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
 
