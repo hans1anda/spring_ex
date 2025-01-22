@@ -3,6 +3,8 @@ package com.devtiro.jpaTest.services.impl;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.repositories.IAuthorRepository;
 import com.devtiro.jpaTest.services.IAuthorService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +38,11 @@ public class AuthorServiceImpl implements IAuthorService {
                                 .spliterator(),
                         false)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<AuthorEntity> findAll(Pageable pageable) {
+        return authorRepository.findAll(pageable);
     }
 
     @Override

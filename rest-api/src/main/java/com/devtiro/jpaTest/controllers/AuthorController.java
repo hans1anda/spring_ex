@@ -4,13 +4,13 @@ import com.devtiro.jpaTest.domain.dto.AuthorDto;
 import com.devtiro.jpaTest.domain.entities.AuthorEntity;
 import com.devtiro.jpaTest.mappers.Mapper;
 import com.devtiro.jpaTest.services.IAuthorService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 public class AuthorController {
@@ -25,10 +25,11 @@ public class AuthorController {
     }
 
     @GetMapping(path = "/authors")
-    public List<AuthorDto> listAuthor() {
-        List<AuthorEntity> authorEntityList = authorService.findAll();
+    public Page<AuthorDto> listAuthor(Pageable pageable) {
 
-        return authorEntityList.stream().map(authorMapper::mapTo).collect(Collectors.toList());
+        Page<AuthorEntity> authorList = authorService.findAll(pageable);
+
+        return authorList.map(authorMapper::mapTo);
     }
 
     @GetMapping(path = "/authors/{id}")
