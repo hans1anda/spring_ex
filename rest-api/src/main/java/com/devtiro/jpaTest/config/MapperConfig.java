@@ -15,6 +15,7 @@ public class MapperConfig {
 
         // This allows nested objects in json ff
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+
         return modelMapper;
     }
 

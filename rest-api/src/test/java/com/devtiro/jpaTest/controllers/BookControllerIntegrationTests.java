@@ -46,7 +46,6 @@ public class BookControllerIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(crateBookJson)
         ).andExpect(
-
                 MockMvcResultMatchers.status().isCreated()
         );
     }

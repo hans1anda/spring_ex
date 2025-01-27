@@ -14,9 +14,9 @@ public interface IBookService {
 
     List<BookEntity> findAll();
 
-    Optional<BookEntity> findOne(String isbn);
-
     Page<BookEntity> findAll(Pageable pageable);
+
+    Optional<BookEntity> findOne(String isbn);
 
     Boolean isExists(String isbn);
 

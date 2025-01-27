@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class AuthorController {
@@ -24,12 +26,20 @@ public class AuthorController {
         this.authorMapper = authorMapper;
     }
 
-    @GetMapping(path = "/authors")
+    @GetMapping(path = "/authors/paged")
     public Page<AuthorDto> listAuthor(Pageable pageable) {
 
         Page<AuthorEntity> authorList = authorService.findAll(pageable);
 
         return authorList.map(authorMapper::mapTo);
+    }
+
+    @GetMapping(path = "/authors")
+    public List<AuthorDto> listAuthor() {
+        List<AuthorEntity> authors = authorService.findAll();
+        return authors.stream()
+                .map(authorMapper::mapTo)
+                .collect(Collectors.toList());
     }
 
     @GetMapping(path = "/authors/{id}")
